@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +16,8 @@ public class Board : MonoBehaviour
     public TileState[] tileStates;
     private Grid grid;
     private List<Tile> tiles;
+
+    private bool waiting;
 
     private void Awake()
     {
@@ -60,29 +64,35 @@ public class Board : MonoBehaviour
     {
 
 
-        if (direction == Vector2.up)
+        if (!waiting)
         {
+            
+       
+             if (direction == Vector2.up)
+                {
             MoveTiles(direction, 0, 1, 1, 1);
-        }
+                }  
 
-        if (direction == Vector2.down)
-        {
+              if (direction == Vector2.down)
+                {
             MoveTiles(direction, 0, 1, grid.height - 2, -1);
-        }
+                }
 
-        if (direction == Vector2.left)
-        {
+              if (direction == Vector2.left)
+                  {
             MoveTiles(direction, 1, 1, 0 , 1);
-        }
-        if (direction == Vector2.right)
-        {
+                  }
+              if (direction == Vector2.right)
+              {
             MoveTiles(direction, grid.width -2 , - 1, 0, 1);
-        }
-
+              }
+         }
 
     }
      private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
+
+        bool changed = false;
 
         for (int x = startX; x >= 0 && x < grid.width; x += incrementX)
         {
@@ -93,19 +103,23 @@ public class Board : MonoBehaviour
 
                 if (cell.occupied)
                 {
-                    MoveTile(cell.tile, direction);
+                   changed  |=  MoveTile(cell.tile, direction);
+                    
                 }
 
 
             }
         }
 
-
+        if (changed)
+        {
+            StartCoroutine(WaitForChanges());
+        }
 
     }
 
 
-    private void MoveTile(Tile tile, Vector2Int direction) 
+    private bool MoveTile(Tile tile, Vector2Int direction) 
     {
         TileCell Startingcell = tile.cell;
      
@@ -116,7 +130,11 @@ public class Board : MonoBehaviour
         {
             if (adjacentCell.occupied)
             {
-                // merging
+                if (CanMerge(tile, adjacentCell.tile))
+                {
+                    Merge(tile,adjacentCell.tile);
+                    return true;
+                }
                 break;
             }
 
@@ -130,17 +148,71 @@ public class Board : MonoBehaviour
         if (newCell != null)
         {
             tile.MoveTo(newCell);
+            return true;
         }
-      //  Startingcell.tile = null;
+        return false;
     }
 
 
-   /* private bool CanMerge(Tile a, Tile b) 
-    { 
-    
-    
+    private void Merge(Tile a, Tile b) 
+    {
+        tiles.Remove(a);
+        a.Merge(b.cell);
+
+        int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1 );
+        int number = b.number * 2;
+
+        b.SetState(tileStates[index], number);
+    }
+
+    private int IndexOf(TileState state) 
+    {
+        for (int i = 0; i < tileStates.Length; i++)
+        {
+          if (state == tileStates[i])
+        {
+                return i;
+        }
+
+           
+        }
         
-    }*/
+    
+        return -1;
+
+    }
+
+
+
+   private bool CanMerge(Tile a, Tile b) 
+    {
+
+        return a.number == b.number;
+        
+    }
+
+
+    private IEnumerator WaitForChanges() 
+    {
+        waiting = true;
+
+        yield return new WaitForSeconds(0.1f);
+        
+        waiting = false;
+
+        if (tiles.Count != grid.size)
+        {
+            CreateTile();
+        }
+
+
+
+
+
+
+    }
+
+
 
 
 }
