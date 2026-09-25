@@ -10,7 +10,9 @@ public class Tile : MonoBehaviour
 
     public int number { get; private set; }
 
-    public bool locked { get; private set; }
+    public bool locked { get; set; }
+
+    public MeshRenderer Mat2Change { get; set; }
 
     public void SetState(TileState state, int number) 
     {
@@ -35,6 +37,15 @@ public class Tile : MonoBehaviour
     
     }
 
+    public void Start()
+    {
+        
+       Mat2Change = gameObject.GetComponent<MeshRenderer>();
+
+
+        Mat2Change.material.color = state.platformColor;
+        
+    }
 
     public void MoveTo(TileCell cell) 
     {
@@ -64,7 +75,7 @@ public class Tile : MonoBehaviour
         }
 
         this.cell = null;
-
+        cell.tile.locked = true;
         StartCoroutine(Animate(cell.transform.position, true));
 
     }

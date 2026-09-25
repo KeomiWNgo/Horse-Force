@@ -42,11 +42,6 @@ public class Board : MonoBehaviour
         CreateTile();
     }
 
-    private void Update()
-    {
-        
-    }
-
 
     private void CreateTile() 
     {
@@ -62,7 +57,6 @@ public class Board : MonoBehaviour
 
     private void InputReceived(Vector2Int direction)
     {
-
 
         if (!waiting)
         {
@@ -163,6 +157,8 @@ public class Board : MonoBehaviour
         int number = b.number * 2;
 
         b.SetState(tileStates[index], number);
+        b.Mat2Change.material.color = b.state.platformColor;
+
     }
 
     private int IndexOf(TileState state) 
@@ -187,7 +183,7 @@ public class Board : MonoBehaviour
    private bool CanMerge(Tile a, Tile b) 
     {
 
-        return a.number == b.number;
+        return a.number == b.number && !b.locked;
         
     }
 
@@ -199,6 +195,14 @@ public class Board : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         
         waiting = false;
+
+
+        foreach (var tile in tiles)
+        {
+            tile.locked = false;
+        }
+
+
 
         if (tiles.Count != grid.size)
         {
