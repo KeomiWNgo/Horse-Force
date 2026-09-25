@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class SwipeDetection : MonoBehaviour
@@ -39,12 +40,17 @@ public class SwipeDetection : MonoBehaviour
         inputManager = FindAnyObjectByType<InputManager>(); 
 
     }
+
+
     private void OnEnable()
     {
         inputManager.OnStartTouch += SwipeStart;
         inputManager.OnEndTouch += SwipeEnd;
 
     }
+
+
+
     private void OnDisable()
     {
         inputManager.OnStartTouch -= SwipeStart;
@@ -59,7 +65,7 @@ public class SwipeDetection : MonoBehaviour
         coroutine = StartCoroutine(Trail());
     }
 
-
+    // constant trail following
     private IEnumerator Trail() {
         while (true) { trail.transform.position = inputManager.PrimaryPosition();
             yield return null;
@@ -74,19 +80,31 @@ public class SwipeDetection : MonoBehaviour
     }
 
     private void DetectSwipe() {
-        if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime - startTime) <= maximumTime) {
+
+        RaycastHit hit;
+
+        if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime - startTime) <= maximumTime)
+        {
             Debug.Log("Swipe Detected");
             Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);
-                }
+        }
+        else if ((endTime - startTime) <= maximumTime)  {
+            if (Physics.Raycast(inputManager.PrimaryPosition(), Vector3.forward, out hit))
+            {
+                Debug.Log(hit.transform.name);
+            }
+      
+        
+        }
     }
 
     private void SwipeDirection(Vector2 direction) {
         if (Vector2.Dot(Vector2.up, direction) > directionThreshold)
         {
-          //  Debug.Log("Swipe UP");
+          
             if (EmovDir != null)
             {
                 EmovDir(Vector2Int.up);
