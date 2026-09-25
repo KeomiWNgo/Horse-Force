@@ -15,7 +15,7 @@ public class Board : MonoBehaviour
 
     public TileState[] tileStates;
     private Grid grid;
-    private List<Tile> tiles;
+    public List<Tile> tiles { get; private set; }
 
     private bool waiting;
 
@@ -42,8 +42,25 @@ public class Board : MonoBehaviour
         CreateTile();
     }
 
+    public void ClearBoard() 
+    {
+        foreach (var tileCell in grid.cells)
+        {
+            tileCell.tile = null;
+        }
 
-    private void CreateTile() 
+        foreach (var tile in tiles)
+        {
+            Destroy(tile.gameObject);
+        }
+
+        tiles.Clear();
+
+    }
+
+
+    // This Portion creates Tiles
+    public void CreateTile() 
     {
 
         Tile tile = Instantiate(tilePrefab, grid.transform);
@@ -107,7 +124,7 @@ public class Board : MonoBehaviour
                 if (cell.occupied)
                 {
                    changed  |=  MoveTile(cell.tile, direction);
-                    
+                
                 }
 
 
@@ -234,7 +251,7 @@ public class Board : MonoBehaviour
     }
 
 
-    private IEnumerator WaitForChanges() 
+    public IEnumerator WaitForChanges() 
     {
         waiting = true;
 

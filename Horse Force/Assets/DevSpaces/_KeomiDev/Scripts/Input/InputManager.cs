@@ -12,7 +12,9 @@ public class InputManager : MonoBehaviour
 
     #endregion
 
-    private PlayerControls playerControls;
+
+    public PlayerControls playerControls;
+   
     private Camera mainCamera;
 
     private void Awake()

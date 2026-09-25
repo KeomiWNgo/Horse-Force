@@ -10,11 +10,11 @@ public class Utils : MonoBehaviour
         position.z = camera.nearClipPlane;
         return camera.ScreenToWorldPoint(position);
     }
-    /*
-    public static Vector3 ScreenToRay(Camera camera, Vector3 position)
+   /* 
+    public static Ray ScreenToRay(Camera camera, Vector3 position)
     {
-        position.z = camera.nearClipPlane;
-        return camera.(position);
+        
+        return  camera.ScreenPointToRay(position);
     }
     */
 

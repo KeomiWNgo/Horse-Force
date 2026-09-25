@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -10,7 +11,8 @@ public class SwipeDetection : MonoBehaviour
     public delegate void MoveDir(Vector2Int direction);
     public event MoveDir EmovDir;
 
-
+    public delegate void AtkButton();
+    public event AtkButton EAtkButton;
 
     #endregion Events
 
@@ -34,11 +36,12 @@ public class SwipeDetection : MonoBehaviour
 
     private Coroutine coroutine;
 
+    private Camera mainCamera;
 
     private void Awake()
     {
-        inputManager = FindAnyObjectByType<InputManager>(); 
-
+        inputManager = FindAnyObjectByType<InputManager>();
+        mainCamera = Camera.main;
     }
 
 
@@ -91,11 +94,26 @@ public class SwipeDetection : MonoBehaviour
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);
         }
-        else if ((endTime - startTime) <= maximumTime)  {
-            if (Physics.Raycast(inputManager.PrimaryPosition(), Vector3.forward, out hit))
+        else  
+        {
+            Ray ray = mainCamera.ScreenPointToRay( inputManager.playerControls.Touch.PrimaryPosition.ReadValue<Vector2>());
+            if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log(hit.transform.name);
+                if (hit.collider != null) 
+                {
+                    Debug.Log(hit.transform.name);
+
+                    if (hit.transform.name == "Attack button")
+                    {
+                        Debug.Log("button hit");
+                        EAtkButton();
+                    }
+
+                }
+                
+              
             }
+            
       
         
         }
