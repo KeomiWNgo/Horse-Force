@@ -32,7 +32,7 @@ public class Tile : MonoBehaviour
         this.cell = cell;
         this.cell.tile = this;
 
-        transform.position = new Vector3(cell.transform.position.x, cell.transform.position.y, cell.transform.position.z - 2);
+        transform.position = cell.transform.position;
         
     
     }

@@ -55,6 +55,11 @@ public class Board : MonoBehaviour
         tiles.Add(tile);
     }
 
+
+
+
+
+    // This portion is the delagate funtion form detect swipe that takes the swipe detection and call [Movetiles function] and provides start and increments based on direction
     private void InputReceived(Vector2Int direction)
     {
 
@@ -83,6 +88,10 @@ public class Board : MonoBehaviour
          }
 
     }
+    //
+
+    
+    // This Portions cyles through all the tiles on the board in a given direction and start while also setting if it's been changed
      private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
 
@@ -111,8 +120,10 @@ public class Board : MonoBehaviour
         }
 
     }
+    //
 
-
+    
+    // This Portion is what moves it by calling [tile.moveto] [canmerge] and [get adjacent]
     private bool MoveTile(Tile tile, Vector2Int direction) 
     {
         TileCell Startingcell = tile.cell;
@@ -148,6 +159,9 @@ public class Board : MonoBehaviour
     }
 
 
+
+
+    // this is called apon merging
     private void Merge(Tile a, Tile b) 
     {
         tiles.Remove(a);
@@ -158,6 +172,9 @@ public class Board : MonoBehaviour
 
         b.SetState(tileStates[index], number);
         b.Mat2Change.material.color = b.state.platformColor;
+        StartCoroutine(Mergefeedback(b.transform.localScale, b));
+
+
 
     }
 
@@ -185,6 +202,35 @@ public class Board : MonoBehaviour
 
         return a.number == b.number && !b.locked;
         
+    }
+
+
+    private IEnumerator Mergefeedback(Vector3 start, Tile tiletochange)
+    {
+        float elapsed = 0f;
+        float duration0 = 0.1f;
+
+        Vector3 end = start + new Vector3(5f, 5f, 5f);
+
+        while (elapsed < duration0)
+        {
+            tiletochange.transform.localScale = Vector3.Lerp(start, end, elapsed / duration0);
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        elapsed = 0f;
+        duration0 = 0.1f;
+
+        while (elapsed < duration0)
+        {
+            tiletochange.transform.localScale = Vector3.Lerp(end , start, elapsed / duration0);
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
     }
 
 
