@@ -88,7 +88,7 @@ public class SwipeDetection : MonoBehaviour
 
         if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime - startTime) <= maximumTime)
         {
-            Debug.Log("Swipe Detected");
+           // Debug.Log("Swipe Detected");
             Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
@@ -101,11 +101,11 @@ public class SwipeDetection : MonoBehaviour
             {
                 if (hit.collider != null) 
                 {
-                    Debug.Log(hit.transform.name);
+                   // Debug.Log(hit.transform.name);
 
                     if (hit.transform.name == "Attack button")
                     {
-                        Debug.Log("button hit");
+                   //     Debug.Log("button hit");
                         EAtkButton();
                     }
 

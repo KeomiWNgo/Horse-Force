@@ -5,7 +5,7 @@ public class AttackButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public SwipeDetection swipeDetection;
     public Board board;
-    
+    public Projectile ProjPrefab;
     private int atkTotal;
 
     private void Awake()
@@ -32,7 +32,8 @@ public class AttackButton : MonoBehaviour
 
         board.ClearBoard();
         board.CreateTile();
-
+        Projectile proj = Instantiate(ProjPrefab, transform);
+        proj.SetDamage(atkTotal);
     }
 
 }
