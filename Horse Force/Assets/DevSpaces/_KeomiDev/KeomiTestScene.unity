@@ -2850,6 +2850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackButton
   swipeDetection: {fileID: 1512829170}
   board: {fileID: 177376681}
+  ProjPrefab: {fileID: 1928901758570276125, guid: 149be8f47f87e9b46844ab733a576ea2, type: 3}
 --- !u!1 &1933184635
 GameObject:
   m_ObjectHideFlags: 0
