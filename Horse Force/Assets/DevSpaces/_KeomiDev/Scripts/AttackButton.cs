@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using UnityEngine;
 
 public class AttackButton : MonoBehaviour
@@ -7,33 +8,55 @@ public class AttackButton : MonoBehaviour
     public Board board;
     public Projectile ProjPrefab;
     private int atkTotal;
+    private int cooldown;
+
+
+    public int coolThresh;
 
     private void Awake()
     {
       
         board = FindAnyObjectByType<Board>();
+        cooldown = 0;
+
+
     }
 
     private void OnEnable()
     {
         swipeDetection.EAtkButton += Atk;
+        swipeDetection.ECoolDown += CoolDown;
     }
 
     private void Atk() 
     {
-
-        atkTotal = 0;
-        for (int i = 0; i < board.tiles.Count; i++)
+        if (cooldown >= coolThresh)
         {
-         atkTotal = atkTotal +board.tiles[i].number;
 
+            atkTotal = 0;
+            for (int i = 0; i < board.tiles.Count; i++)
+            {
+             atkTotal = atkTotal +board.tiles[i].number;
+
+            }
+            Debug.Log(atkTotal);
+
+            board.ClearBoard();
+            board.CreateTile();
+            Projectile proj = Instantiate(ProjPrefab, transform);
+            proj.SetDamage(atkTotal);
+            cooldown = 0;
         }
-        Debug.Log(atkTotal);
-
-        board.ClearBoard();
-        board.CreateTile();
-        Projectile proj = Instantiate(ProjPrefab, transform);
-        proj.SetDamage(atkTotal);
     }
 
+    private int CoolDown() {
+
+        return cooldown++;
+    
+    
+    }
+
+    
+  
 }
+

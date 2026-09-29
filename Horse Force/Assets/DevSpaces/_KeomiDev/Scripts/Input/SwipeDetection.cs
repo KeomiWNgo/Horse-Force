@@ -14,6 +14,11 @@ public class SwipeDetection : MonoBehaviour
     public delegate void AtkButton();
     public event AtkButton EAtkButton;
 
+    public delegate int Cooldown();
+    public event Cooldown ECoolDown;
+
+
+
     #endregion Events
 
     private InputManager inputManager;
@@ -126,7 +131,7 @@ public class SwipeDetection : MonoBehaviour
             if (EmovDir != null)
             {
                 EmovDir(Vector2Int.up);
-
+                ECoolDown();
             }
 
         }
@@ -135,7 +140,7 @@ public class SwipeDetection : MonoBehaviour
             if (EmovDir != null)
             {
                 EmovDir(Vector2Int.down);
-
+                ECoolDown();
             }
 
         }
@@ -145,6 +150,7 @@ public class SwipeDetection : MonoBehaviour
             if (EmovDir != null)
             {
                 EmovDir(Vector2Int.left);
+                ECoolDown();
             }
         }
         if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
@@ -153,6 +159,7 @@ public class SwipeDetection : MonoBehaviour
             if (EmovDir != null)
             {
                 EmovDir(Vector2Int.right);
+                ECoolDown();
             }
         }
     }
