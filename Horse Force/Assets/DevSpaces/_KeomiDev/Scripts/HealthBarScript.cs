@@ -5,11 +5,11 @@ public class HealthBarScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Slider enemyHealthBar;
-    public EnemyHealth enemyHealth;
+    public Health enemyHealth;
 
     private void Awake()
     {
-        enemyHealth =  FindAnyObjectByType<EnemyHealth>();
+    //    enemyHealth =  FindAnyObjectByType<Health>();
     }
 
     void Start()
