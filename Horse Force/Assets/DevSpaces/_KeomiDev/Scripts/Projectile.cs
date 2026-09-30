@@ -13,7 +13,22 @@ public class Projectile : MonoBehaviour
     
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("HasHealthComp"))
+        {
+            Debug.Log("Hit");
 
+            Health healthOfTarget;
+
+            healthOfTarget = other.gameObject.GetComponent<Health>();
+
+            healthOfTarget.currhealth = healthOfTarget.currhealth - damage;
+
+            Destroy(gameObject);
+        }
+       
+    }
 
 
     private void Start()
@@ -24,7 +39,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.25f, gameObject.transform.position.z) * Time.deltaTime;
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 50f * Time.deltaTime, gameObject.transform.position.z);
     }
 }
 

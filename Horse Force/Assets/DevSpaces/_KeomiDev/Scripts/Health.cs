@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     public int maxhealth;
-    public int currhealth { get; private set; }
+    public int currhealth { get;  set; }
 
     void Start()
     {
@@ -18,6 +18,6 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currhealth--;
+      //  currhealth--;
     }
 }
