@@ -7,10 +7,19 @@ using System.Collections.Generic;
 
 public class Healing : MonoBehaviour
 {
+    public int healCount = 3;
     public Health maxHealth;
     public void HealthUp()
     {
-        maxHealth.currhealth += maxHealth.maxhealth / 4; // Add to the current health by 25% of the maximum health when used
-        Debug.Log("Activated Health Powerup");
+        if (healCount > 0)
+        {
+            maxHealth.currhealth += maxHealth.maxhealth / 4; // Add to the current health by 25% of the maximum health when used
+            Debug.Log("Activated Health Powerup");
+            healCount--;
+        }
+        else
+        {
+            Debug.Log("Out of Healing Powerups");
+        }
     }
 }
