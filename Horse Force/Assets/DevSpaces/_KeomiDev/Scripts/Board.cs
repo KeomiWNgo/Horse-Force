@@ -5,10 +5,18 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Board : MonoBehaviour
 {
 
+
+    public delegate void Add2Score(int calc);
+
+    public event Add2Score EAdd2Score;
+
+
+    #region Vars
     public SwipeDetection swipeDetection;
 
     public Tile tilePrefab;
@@ -18,6 +26,10 @@ public class Board : MonoBehaviour
     public List<Tile> tiles { get; private set; }
 
     private bool waiting;
+
+    private int toSend;
+
+    #endregion
 
     private void Awake()
     {
@@ -33,7 +45,7 @@ public class Board : MonoBehaviour
         swipeDetection.EmovDir += InputReceived;
     }
 
-   
+
 
     private void Start()
     {
@@ -42,7 +54,7 @@ public class Board : MonoBehaviour
         CreateTile();
     }
 
-    public void ClearBoard() 
+    public void ClearBoard()
     {
         foreach (var tileCell in grid.cells)
         {
@@ -60,11 +72,11 @@ public class Board : MonoBehaviour
 
 
     // This Portion creates Tiles
-    public void CreateTile() 
+    public void CreateTile()
     {
 
         Tile tile = Instantiate(tilePrefab, grid.transform);
-     
+
         tile.SetState(tileStates[0], 2);
 
         tile.Spawn(grid.GetRandomEmptyCell());
@@ -82,34 +94,34 @@ public class Board : MonoBehaviour
 
         if (!waiting)
         {
-            
-       
-             if (direction == Vector2.up)
-                {
-            MoveTiles(direction, 0, 1, 1, 1);
-                }  
 
-              if (direction == Vector2.down)
-                {
-            MoveTiles(direction, 0, 1, grid.height - 2, -1);
-                }
 
-              if (direction == Vector2.left)
-                  {
-            MoveTiles(direction, 1, 1, 0 , 1);
-                  }
-              if (direction == Vector2.right)
-              {
-            MoveTiles(direction, grid.width -2 , - 1, 0, 1);
-              }
-         }
+            if (direction == Vector2.up)
+            {
+                MoveTiles(direction, 0, 1, 1, 1);
+            }
+
+            if (direction == Vector2.down)
+            {
+                MoveTiles(direction, 0, 1, grid.height - 2, -1);
+            }
+
+            if (direction == Vector2.left)
+            {
+                MoveTiles(direction, 1, 1, 0, 1);
+            }
+            if (direction == Vector2.right)
+            {
+                MoveTiles(direction, grid.width - 2, -1, 0, 1);
+            }
+        }
 
     }
     //
 
-    
+
     // This Portions cyles through all the tiles on the board in a given direction and start while also setting if it's been changed
-     private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
+    private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
 
         bool changed = false;
@@ -123,8 +135,8 @@ public class Board : MonoBehaviour
 
                 if (cell.occupied)
                 {
-                   changed  |=  MoveTile(cell.tile, direction);
-                
+                    changed |= MoveTile(cell.tile, direction);
+
                 }
 
 
@@ -139,12 +151,12 @@ public class Board : MonoBehaviour
     }
     //
 
-    
+
     // This Portion is what moves it by calling [tile.moveto] [canmerge] and [get adjacent]
-    private bool MoveTile(Tile tile, Vector2Int direction) 
+    private bool MoveTile(Tile tile, Vector2Int direction)
     {
         TileCell Startingcell = tile.cell;
-     
+
         TileCell newCell = null;
         TileCell adjacentCell = grid.GetAdjacentCell(tile.cell, direction);
 
@@ -154,7 +166,7 @@ public class Board : MonoBehaviour
             {
                 if (CanMerge(tile, adjacentCell.tile))
                 {
-                    Merge(tile,adjacentCell.tile);
+                    Merge(tile, adjacentCell.tile);
                     return true;
                 }
                 break;
@@ -179,12 +191,12 @@ public class Board : MonoBehaviour
 
 
     // this is called apon merging
-    private void Merge(Tile a, Tile b) 
+    private void Merge(Tile a, Tile b)
     {
         tiles.Remove(a);
         a.Merge(b.cell);
 
-        int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1 );
+        int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
         int number = b.number * 2;
 
         b.SetState(tileStates[index], number);
@@ -195,31 +207,54 @@ public class Board : MonoBehaviour
 
     }
 
-    private int IndexOf(TileState state) 
+    private int IndexOf(TileState state)
     {
         for (int i = 0; i < tileStates.Length; i++)
         {
-          if (state == tileStates[i])
-        {
+            if (state == tileStates[i])
+            {
                 return i;
+            }
+
+
         }
 
-           
-        }
-        
-    
+
         return -1;
 
     }
 
 
 
-   private bool CanMerge(Tile a, Tile b) 
+    private bool CanMerge(Tile a, Tile b)
     {
 
         return a.number == b.number && !b.locked;
-        
+
     }
+
+
+
+
+    //Calculates the score and the attack value
+    public int ScoreCalc()
+    {
+
+        toSend = 0;
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            toSend = toSend + tiles[i].number;
+        }
+
+        EAdd2Score(toSend);
+
+
+        return toSend;
+
+    }
+
+
+
 
 
     private IEnumerator Mergefeedback(Vector3 start, Tile tiletochange)

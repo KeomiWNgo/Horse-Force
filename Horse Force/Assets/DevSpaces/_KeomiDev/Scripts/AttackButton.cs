@@ -4,6 +4,13 @@ using UnityEngine;
 public class AttackButton : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    #region Events
+
+
+    #endregion
+
+
     public SwipeDetection swipeDetection;
     public Board board;
     public Projectile ProjPrefab;
@@ -30,15 +37,19 @@ public class AttackButton : MonoBehaviour
 
     private void Atk() 
     {
+
+
         if (cooldown >= coolThresh)
         {
 
             atkTotal = 0;
-            for (int i = 0; i < board.tiles.Count; i++)
-            {
-             atkTotal = atkTotal +board.tiles[i].number;
+            /* for (int i = 0; i < board.tiles.Count; i++)
+             {
+              atkTotal = atkTotal +board.tiles[i].number;
 
-            }
+             }*/
+            atkTotal = board.ScoreCalc();
+
             Debug.Log(atkTotal);
 
             board.ClearBoard();
