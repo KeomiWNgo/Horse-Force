@@ -11,11 +11,15 @@ public class Healing : MonoBehaviour
     public Health maxHealth;
     public void HealthUp()
     {
-        if (healCount > 0)
+        if (healCount > 0 && maxHealth.currhealth != maxHealth.maxhealth) // ONLY HEAL WHEN THE PLAYER HAS BEEN DAMAGED
         {
             maxHealth.currhealth += maxHealth.maxhealth / 4; // Add to the current health by 25% of the maximum health when used
             Debug.Log("Activated Health Powerup");
             healCount--;
+        }
+        else if (maxHealth.currhealth == maxHealth.maxhealth)
+        {
+            Debug.Log("Player is at full health!");
         }
         else
         {
