@@ -6,29 +6,30 @@ public class AttackButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     #region Events
-
+    public delegate void updatescore();
+    public event updatescore EUpdateScore;
 
     #endregion
 
 
-    public SwipeDetection swipeDetection;
+    private SwipeDetection swipeDetection;
     public Board board;
     public Projectile ProjPrefab;
     private int atkTotal;
     private int cooldown;
-
-
     public int coolThresh;
 
     private void Awake()
     {
-      
+        swipeDetection = FindAnyObjectByType<SwipeDetection>();
         board = FindAnyObjectByType<Board>();
         cooldown = 0;
-
-
     }
 
+
+    /// <summary>
+    /// subscribes to events from swipe detection
+    /// </summary>
     private void OnEnable()
     {
         swipeDetection.EAtkButton += Atk;
@@ -58,7 +59,9 @@ public class AttackButton : MonoBehaviour
             proj.SetDamage(atkTotal);
             cooldown = 0;
         }
+        EUpdateScore();
     }
+
 
     private int CoolDown() {
 
