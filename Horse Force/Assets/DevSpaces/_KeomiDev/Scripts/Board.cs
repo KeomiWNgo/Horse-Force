@@ -241,12 +241,13 @@ public class Board : MonoBehaviour
     {
 
         toSend = 0;
+
         for (int i = 0; i < tiles.Count; i++)
         {
             toSend = toSend + tiles[i].number;
         }
 
-        EAdd2Score(toSend);
+            EAdd2Score(toSend);
 
 
         return toSend;

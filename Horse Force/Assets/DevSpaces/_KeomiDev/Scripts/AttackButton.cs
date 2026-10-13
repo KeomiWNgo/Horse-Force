@@ -6,7 +6,8 @@ public class AttackButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     #region Events
-
+    public delegate void updatescore();
+    public event updatescore EUpdateScore;
 
     #endregion
 
@@ -58,6 +59,10 @@ public class AttackButton : MonoBehaviour
             proj.SetDamage(atkTotal);
             cooldown = 0;
         }
+
+        EUpdateScore();
+
+
     }
 
     private int CoolDown() {
