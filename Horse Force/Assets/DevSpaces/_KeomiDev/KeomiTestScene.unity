@@ -185,7 +185,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Time: 0.26
+  m_Time: 0.1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -194,8 +194,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.023723602
-        value: 0.6181145
+        time: 0.00007247925
+        value: 0.15946579
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -203,8 +203,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0.3543313
+        time: 0.9971924
+        value: 0.05904323
         inSlope: 0
         outSlope: 0
         tangentMode: 0
