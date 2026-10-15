@@ -10,14 +10,17 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Board : MonoBehaviour
 {
 
-
+    #region Events
     public delegate void Add2Score(int calc);
 
     public event Add2Score EAdd2Score;
-
+    #endregion
 
     #region Vars
-    public SwipeDetection swipeDetection;
+    AttackButton atkButton;
+    private SwipeDetection swipeDetection;
+
+    private GameManager gameManager;
 
     public Tile tilePrefab;
 
@@ -33,10 +36,11 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
+        atkButton = FindAnyObjectByType<AttackButton>();
         grid = GetComponentInChildren<Grid>();
         tiles = new List<Tile>(16);
 
-
+        swipeDetection = FindAnyObjectByType<SwipeDetection>();
 
     }
 
@@ -45,14 +49,6 @@ public class Board : MonoBehaviour
         swipeDetection.EmovDir += InputReceived;
     }
 
-
-
-    private void Start()
-    {
-        CreateTile();
-
-        CreateTile();
-    }
 
     public void ClearBoard()
     {
@@ -308,12 +304,67 @@ public class Board : MonoBehaviour
             CreateTile();
         }
 
-
+        if (CheckForGameOVer())
+        {
+            ScoreCalc();
+            Debug.Log("LOST");
+            gameManager.GameOver();
+            
+        }
 
 
 
 
     }
+
+    private bool CheckForGameOVer ()
+    
+    {
+        if (tiles.Count != grid.size)
+        {
+            return false;
+        }
+
+        foreach (var tile in tiles)
+        {
+            TileCell up = grid.GetAdjacentCell(tile.cell, Vector2Int.up);
+            TileCell down = grid.GetAdjacentCell(tile.cell, Vector2Int.down);
+            TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
+            TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
+
+            if (up != null && CanMerge(tile, up.tile)) 
+            {
+                return false;
+            }
+            if (down != null && CanMerge(tile, down.tile))
+            {
+                return false;
+            }
+            if (left != null && CanMerge(tile, left.tile))
+            {
+                return false;
+            }
+            if (right != null && CanMerge(tile, right.tile))
+            {
+                return false;
+            }
+        }
+
+
+        if (atkButton.GetCooldown() >= atkButton.coolThresh)
+        {
+
+            return false;
+
+        }
+
+        return true;
+
+
+    }
+
+
+
 
 
 
