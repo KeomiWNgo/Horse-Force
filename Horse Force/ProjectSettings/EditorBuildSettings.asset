@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/HorseForce/Scenes/09_Procedures.unity
     guid: 8cd39cf1d9bb7d24c8f94e73e3d9b782
   - enabled: 1
+    path: Assets/HorseForce/Scenes/10_LoseScreen.unity
+    guid: 6faaf743fb837ce4eb5bca5e3fbf4e3f
+  - enabled: 1
     path: Assets/DevSpaces/_KeomiDev/KeomiTestScene.unity
     guid: 8bfbd091f1d39d5409cba118658800d2
   m_configObjects:

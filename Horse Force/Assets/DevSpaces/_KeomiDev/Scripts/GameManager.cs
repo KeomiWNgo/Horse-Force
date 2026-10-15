@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
         board.enabled = false;
         atkButton.enabled = false;
-       // SceneManager.LoadScene();
+        SceneManager.LoadScene(11);
         
     
     }
