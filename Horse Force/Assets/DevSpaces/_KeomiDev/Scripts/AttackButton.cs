@@ -26,6 +26,13 @@ public class AttackButton : MonoBehaviour
         cooldown = 0;
     }
 
+    public int GetCooldown() 
+    {
+
+
+        return cooldown;
+    
+    }
 
     /// <summary>
     /// subscribes to events from swipe detection

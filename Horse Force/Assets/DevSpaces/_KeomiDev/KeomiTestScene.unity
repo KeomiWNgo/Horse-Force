@@ -646,7 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e3a8bc4cb245b4c86fe09df23a3c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Board
-  swipeDetection: {fileID: 1512829170}
   tilePrefab: {fileID: 9006489516341976506, guid: 9d7fbe32ad8e5714093dd6f599349621, type: 3}
   tileStates:
   - {fileID: 11400000, guid: 04cfd944e1c4b814aa637ee86cb81ba5, type: 2}
@@ -4075,10 +4074,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a303fefabe628c74ca8e38f6379d5a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackButton
-  swipeDetection: {fileID: 1512829170}
   board: {fileID: 177376681}
   ProjPrefab: {fileID: 1928901758570276125, guid: 149be8f47f87e9b46844ab733a576ea2, type: 3}
-  coolThresh: 1
+  coolThresh: 5
 --- !u!54 &1835175330
 Rigidbody:
   m_ObjectHideFlags: 0

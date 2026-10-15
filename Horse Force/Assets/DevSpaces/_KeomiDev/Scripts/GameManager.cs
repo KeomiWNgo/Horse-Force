@@ -1,25 +1,57 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
-  
+
     private Board board;
 
     private int endScore;
 
-    private AttackButton AtkButton;
+    private AttackButton atkButton;
+
+
+
+    private void Start()
+    {
+        NewGame();
+    }
+
+
+
+    public void NewGame()
+    {
+        board.ClearBoard();
+
+        board.CreateTile();
+        board.CreateTile();
+        atkButton.enabled = true;
+        board.enabled = true;
+    }
+
+    public void GameOver() 
+    {
+
+        board.enabled = false;
+        atkButton.enabled = false;
+       // SceneManager.LoadScene();
+        
     
+    }
+
 
     /// <summary>
     ///Finds reference to the game board and the attack button
     /// </summary>
     private void Awake()
     {
-     AtkButton =  FindAnyObjectByType<AttackButton>();
+     atkButton =  FindAnyObjectByType<AttackButton>();
      board =   FindAnyObjectByType<Board>();
     }
+
+
 
     /// <summary>
     /// Subscribes to the events in game board and attack button
@@ -27,9 +59,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         board.EAdd2Score += Add2Score;
-        AtkButton.EUpdateScore += DisplayScore;
+        atkButton.EUpdateScore += DisplayScore;
 
     }
+
+
+
+
 
     /// <summary>
     /// Unsubscribes incase something happens
@@ -37,8 +73,13 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         board.EAdd2Score -= Add2Score;
-        AtkButton.EUpdateScore -= DisplayScore;
+        atkButton.EUpdateScore -= DisplayScore;
     }
+
+
+
+
+
     /// <summary>
     /// adds the score this is called from the board 
     /// </summary>
@@ -49,6 +90,11 @@ public class GameManager : MonoBehaviour
         endScore = endScore + Calc;
     
     }
+
+
+
+
+
 
     /// <summary>
     /// Displays score
