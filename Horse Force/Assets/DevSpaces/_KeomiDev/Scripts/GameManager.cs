@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder(-1)]
+
 public class GameManager : MonoBehaviour
 {
 
@@ -34,9 +34,11 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     {
 
-        board.enabled = false;
-        atkButton.enabled = false;
-        SceneManager.LoadScene(11);
+
+        Debug.Log("this does in deed fire");
+        //  board.enabled = false;
+        // atkButton.enabled = false;
+        SceneManager.LoadScene(10);
         
     
     }
