@@ -4077,7 +4077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackButton
   board: {fileID: 177376681}
   ProjPrefab: {fileID: 1928901758570276125, guid: 149be8f47f87e9b46844ab733a576ea2, type: 3}
-  coolThresh: 1000
+  coolThresh: 5
 --- !u!54 &1835175330
 Rigidbody:
   m_ObjectHideFlags: 0
