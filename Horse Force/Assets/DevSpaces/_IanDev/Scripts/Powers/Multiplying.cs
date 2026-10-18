@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class Multiplying : MonoBehaviour
 {
+    // Change as needed
     public int multCount = 3;
     public float multValue;
     public bool isMult;
