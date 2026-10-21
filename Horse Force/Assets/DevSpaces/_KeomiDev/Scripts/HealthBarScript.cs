@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class HealthBarScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Slider enemyHealthBar;
-    public Health enemyHealth;
+    public Slider objHealthBar;
+    public Health objHealth;
+
+    public TextMeshProUGUI HealthV;
 
     private void Awake()
     {
@@ -14,12 +16,17 @@ public class HealthBarScript : MonoBehaviour
 
     void Start()
     {
-        enemyHealthBar.maxValue = enemyHealth.maxhealth;
+        objHealthBar.maxValue = objHealth.maxhealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyHealthBar.value = enemyHealth.currhealth;
+        objHealthBar.value = objHealth.currhealth;
+        HealthV.text = objHealth.currhealth.ToString();
+
+
     }
+
+
 }

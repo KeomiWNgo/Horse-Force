@@ -197,6 +197,7 @@ public class Board : MonoBehaviour
 
         b.SetState(tileStates[index], number);
         b.Mat2Change.material.color = b.state.platformColor;
+        b.childTMP.text = b.number.ToString();
         StartCoroutine(Mergefeedback(b.transform.localScale, b));
 
 
