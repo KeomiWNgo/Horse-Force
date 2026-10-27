@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-
+    
 
     #region Vars
 
@@ -17,10 +17,15 @@ public class GameManager : MonoBehaviour
 
     private int endScore;
 
+    public int highScore;
+
+
     private AttackButton atkButton;
 
-    public Health[] objsWHealth;
-   
+    private Health[] objsWHealth;
+
+    private DataSaverJSON datasaver;
+
     #endregion
 
     private void Start()
@@ -40,16 +45,22 @@ public class GameManager : MonoBehaviour
         board.enabled = true;
     }
 
-    public void GameOver() 
+    public void GameOver()
     {
 
+        if (endScore > highScore)
+        {
+            highScore = endScore;
+        }
 
+        datasaver.SaveData();
+        
         Debug.Log("this does in deed fire");
         //  board.enabled = false;
         // atkButton.enabled = false;
         SceneManager.LoadScene(10);
-        
-    
+
+
     }
 
 
@@ -58,8 +69,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-     atkButton =  FindAnyObjectByType<AttackButton>();
-     board =   FindAnyObjectByType<Board>();
+
+        datasaver = FindAnyObjectByType<DataSaverJSON>();
+
+        datasaver.LoadData();
+
+        atkButton = FindAnyObjectByType<AttackButton>();
+        board = FindAnyObjectByType<Board>();
 
         objsWHealth = FindObjectsByType<Health>();
 
@@ -84,7 +100,7 @@ public class GameManager : MonoBehaviour
         atkButton.EUpdateScore += DisplayScore;
         playerHealth.EPlayerDied += GameOver;
     }
-   
+
 
 
 
@@ -99,7 +115,7 @@ public class GameManager : MonoBehaviour
         playerHealth.EPlayerDied -= GameOver;
     }
 
- #endregion
+    #endregion
 
 
 
@@ -107,11 +123,11 @@ public class GameManager : MonoBehaviour
     /// adds the score this is called from the board 
     /// </summary>
     /// <param name="Calc"> Calc is the score that the board tallied and is sending over</param>
-    private void Add2Score(int Calc) 
+    private void Add2Score(int Calc)
     {
 
         endScore = endScore + Calc;
-    
+
     }
 
 
@@ -122,15 +138,19 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Displays score
     /// </summary>
-    private void DisplayScore() 
+    private void DisplayScore()
     {
         Debug.Log("Score update =" + endScore);
-    
-    
-    
+
+
+
     }
 
 
-
+    public void setHighscore(int newval)
+        {
+        highScore = newval;
+    
+    }
 
 }
