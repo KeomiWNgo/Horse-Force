@@ -49,7 +49,9 @@ public class Board : MonoBehaviour
         swipeDetection.EmovDir += InputReceived;
     }
 
-
+    /// <summary>
+    /// clears Board
+    /// </summary>
     public void ClearBoard()
     {
         foreach (var tileCell in grid.cells)
@@ -67,7 +69,9 @@ public class Board : MonoBehaviour
     }
 
 
-    // This Portion creates Tiles
+    /// <summary>
+    /// Creates Tile
+    /// </summary>
     public void CreateTile()
     {
 
@@ -222,7 +226,12 @@ public class Board : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// This Portion checks if a and be can merge
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
     private bool CanMerge(Tile a, Tile b)
     {
 
@@ -317,7 +326,10 @@ public class Board : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// Checks if the game is over
+    /// </summary>
+    /// <returns></returns>
     private bool CheckForGameOVer ()
     
     {
