@@ -4128,8 +4128,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8424294028887917832, guid: f73f4ac3b7163b4449ff0f316291b565, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1907867450}
   m_SourcePrefab: {fileID: 100100000, guid: f73f4ac3b7163b4449ff0f316291b565, type: 3}
+--- !u!1 &1907867449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8424294028887917832, guid: f73f4ac3b7163b4449ff0f316291b565, type: 3}
+  m_PrefabInstance: {fileID: 1907867448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1907867450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907867449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d7ca75f5b2c924084288d2da0d4c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBehaviour
+  playerHealth: {fileID: 0}
+  damagePerTick: 10
+  damageInterval: 3
 --- !u!1 &1933184635
 GameObject:
   m_ObjectHideFlags: 0
