@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdf1c59f0b47774fbbc5ac5116a3832, type: 3}
   m_Name: 16
   m_EditorClassIdentifier: Assembly-CSharp::TileState
-  platformColor: {r: 0.9333334, g: 0.56078434, b: 0.37647063, a: 0}
+  platformColor: {r: 1, g: 0, b: 0.8056723, a: 0}
