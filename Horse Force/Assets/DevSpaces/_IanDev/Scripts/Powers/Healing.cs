@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Healing : MonoBehaviour
 {
     // Change as needed
-    public int healCount = 3;
+    public static int healCount = 3;
     public Health maxHealth;
     [SerializeField] private float CDMax = 6f;
     [SerializeField] private float CDTime;

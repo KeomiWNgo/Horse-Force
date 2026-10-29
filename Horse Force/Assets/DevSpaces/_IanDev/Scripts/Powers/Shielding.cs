@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Shielding : MonoBehaviour
 {
     // Change as needed
-    public int shieldCount = 3;
+    public static int shieldCount = 3;
     public bool isShielded = false; // Shield is off by default
 
     public void ShieldUp()
