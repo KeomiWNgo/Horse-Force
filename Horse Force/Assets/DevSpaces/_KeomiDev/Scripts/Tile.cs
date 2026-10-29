@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using TMPro;
 public class Tile : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -12,12 +13,15 @@ public class Tile : MonoBehaviour
 
     public bool locked { get; set; }
 
+    public TextMeshPro childTMP;
+
     public MeshRenderer Mat2Change { get; set; }
 
     public void SetState(TileState state, int number) 
     {
         this.state = state;
         this.number = number;
+
     }
 
 
@@ -44,9 +48,12 @@ public class Tile : MonoBehaviour
 
 
         Mat2Change.material.color = state.platformColor;
-        
-    }
 
+        childTMP = GetComponentInChildren<TextMeshPro>();
+
+
+    }
+  
     public void MoveTo(TileCell cell) 
     {
         if (this.cell != null)
