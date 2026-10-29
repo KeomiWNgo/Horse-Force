@@ -1,18 +1,27 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder(-1)]
+
 public class GameManager : MonoBehaviour
 {
 
+
+
+    #region Vars
+
+    private Health playerHealth;
     private Board board;
 
     private int endScore;
 
     private AttackButton atkButton;
 
-
+    public Health[] objsWHealth;
+   
+    #endregion
 
     private void Start()
     {
@@ -34,9 +43,11 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     {
 
-        board.enabled = false;
-        atkButton.enabled = false;
-       // SceneManager.LoadScene();
+
+        Debug.Log("this does in deed fire");
+        //  board.enabled = false;
+        // atkButton.enabled = false;
+        SceneManager.LoadScene(10);
         
     
     }
@@ -49,10 +60,21 @@ public class GameManager : MonoBehaviour
     {
      atkButton =  FindAnyObjectByType<AttackButton>();
      board =   FindAnyObjectByType<Board>();
+
+        objsWHealth = FindObjectsByType<Health>();
+
+        for (int i = 0; i < objsWHealth.Length; i++)
+        {
+            if (objsWHealth[i].gameObject.CompareTag("Player"))
+            {
+                playerHealth = objsWHealth[i];
+            }
+        }
+
     }
 
 
-
+    #region EvenEn/Dis
     /// <summary>
     /// Subscribes to the events in game board and attack button
     /// </summary>
@@ -60,9 +82,9 @@ public class GameManager : MonoBehaviour
     {
         board.EAdd2Score += Add2Score;
         atkButton.EUpdateScore += DisplayScore;
-
+        playerHealth.EPlayerDied += GameOver;
     }
-
+   
 
 
 
@@ -74,9 +96,10 @@ public class GameManager : MonoBehaviour
     {
         board.EAdd2Score -= Add2Score;
         atkButton.EUpdateScore -= DisplayScore;
+        playerHealth.EPlayerDied -= GameOver;
     }
 
-
+ #endregion
 
 
 

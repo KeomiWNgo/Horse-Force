@@ -39,7 +39,7 @@ public class Board : MonoBehaviour
         atkButton = FindAnyObjectByType<AttackButton>();
         grid = GetComponentInChildren<Grid>();
         tiles = new List<Tile>(16);
-
+        gameManager = FindAnyObjectByType<GameManager>();
         swipeDetection = FindAnyObjectByType<SwipeDetection>();
 
     }
@@ -257,7 +257,7 @@ public class Board : MonoBehaviour
     private IEnumerator Mergefeedback(Vector3 start, Tile tiletochange)
     {
         float elapsed = 0f;
-        float duration0 = 0.1f;
+        float duration0 = 0.05f;
 
         Vector3 end = start + new Vector3(5f, 5f, 5f);
 
@@ -357,6 +357,9 @@ public class Board : MonoBehaviour
             return false;
 
         }
+
+
+        
 
         return true;
 
