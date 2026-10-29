@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 // Ian Phurchpean
-// Shop Manager Script
+// Shop Manager Script used to manage the different items the player can purchase in the game
 
 public class ShopManager : MonoBehaviour
 {

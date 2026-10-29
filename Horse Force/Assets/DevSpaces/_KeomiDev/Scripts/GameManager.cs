@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
-
-
     #region Vars
 
     private Health playerHealth;
@@ -20,15 +17,42 @@ public class GameManager : MonoBehaviour
     private AttackButton atkButton;
 
     public Health[] objsWHealth;
-   
+    public static GameManager gameInstance;
+    public int playerMoney;
+
+    public int powerupOne;
+    public int powerupTwo;
+    public int powerupThree;
+
     #endregion
+
+
+    /// <summary>
+    ///Finds reference to the game board and the attack button
+    /// </summary>
+    private void Awake()
+    {
+        atkButton = FindAnyObjectByType<AttackButton>();
+        board = FindAnyObjectByType<Board>();
+
+        objsWHealth = FindObjectsByType<Health>();
+
+        for (int i = 0; i < objsWHealth.Length; i++)
+        {
+            if (objsWHealth[i].gameObject.CompareTag("Player"))
+            {
+                playerHealth = objsWHealth[i];
+            }
+        }
+        // Set game instance to the game manager at all times
+        if (gameInstance == null) gameInstance = this;
+        else Destroy(this); // If there is already an existing game manager, eliminate this
+    }
 
     private void Start()
     {
         NewGame();
     }
-
-
 
     public void NewGame()
     {
@@ -52,28 +76,6 @@ public class GameManager : MonoBehaviour
     
     }
 
-
-    /// <summary>
-    ///Finds reference to the game board and the attack button
-    /// </summary>
-    private void Awake()
-    {
-     atkButton =  FindAnyObjectByType<AttackButton>();
-     board =   FindAnyObjectByType<Board>();
-
-        objsWHealth = FindObjectsByType<Health>();
-
-        for (int i = 0; i < objsWHealth.Length; i++)
-        {
-            if (objsWHealth[i].gameObject.CompareTag("Player"))
-            {
-                playerHealth = objsWHealth[i];
-            }
-        }
-
-    }
-
-
     #region EvenEn/Dis
     /// <summary>
     /// Subscribes to the events in game board and attack button
@@ -85,10 +87,6 @@ public class GameManager : MonoBehaviour
         playerHealth.EPlayerDied += GameOver;
     }
    
-
-
-
-
     /// <summary>
     /// Unsubscribes incase something happens
     /// </summary>
@@ -100,9 +98,6 @@ public class GameManager : MonoBehaviour
     }
 
  #endregion
-
-
-
     /// <summary>
     /// adds the score this is called from the board 
     /// </summary>
@@ -111,13 +106,9 @@ public class GameManager : MonoBehaviour
     {
 
         endScore = endScore + Calc;
+        playerMoney += endScore / 10;
     
     }
-
-
-
-
-
 
     /// <summary>
     /// Displays score
@@ -125,12 +116,8 @@ public class GameManager : MonoBehaviour
     private void DisplayScore() 
     {
         Debug.Log("Score update =" + endScore);
-    
+        
     
     
     }
-
-
-
-
 }
