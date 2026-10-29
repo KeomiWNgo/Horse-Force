@@ -20,9 +20,9 @@ public class PauseMenu : MonoBehaviour
 
     // Uncomment the SerializeFields when implemented into the game
 
-    //[SerializeField] private AttackButton attack;
-    //[SerializeField] private Board swipe;
-    //[SerializeField] private EnemyBehaviour enemy;
+    [SerializeField] private AttackButton attack;
+    [SerializeField] private Board swipe;
+    [SerializeField] private EnemyBehaviour enemy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,21 +32,15 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1; // Set the scale of time to standard on level startup
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // Pause the Game
     public void Pause()
     {
         // Disable all of these functions
 
         // Uncomment these calls when implementing into the game
-        //attack.enabled = false;
-        //swipe.enabled = false;
-        //enemy.enabled = false;
+        attack.enabled = false;
+        swipe.enabled = false;
+        enemy.enabled = false;
 
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
@@ -59,9 +53,9 @@ public class PauseMenu : MonoBehaviour
     public void Unpause()
     {
         // Uncomment these calls when implementing into the game
-        //attack.enabled = true;
-        //swipe.enabled = true;
-        //enemy.enabled = true;
+        attack.enabled = true;
+        swipe.enabled = true;
+        enemy.enabled = true;
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
