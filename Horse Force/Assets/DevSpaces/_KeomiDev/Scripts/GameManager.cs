@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    
+
     #region Vars
 
     private Health playerHealth;
@@ -14,17 +17,51 @@ public class GameManager : MonoBehaviour
 
     private int endScore;
 
+    public int highScore;
+
+
     private AttackButton atkButton;
 
-    public Health[] objsWHealth;
-    public static GameManager gameInstance;
-    public int playerMoney;
+    private Health[] objsWHealth;
 
-    public int powerupOne;
-    public int powerupTwo;
-    public int powerupThree;
+    private DataSaverJSON datasaver;
 
     #endregion
+
+    private void Start()
+    {
+        NewGame();
+    }
+
+
+
+    public void NewGame()
+    {
+        board.ClearBoard();
+
+        board.CreateTile();
+        board.CreateTile();
+        atkButton.enabled = true;
+        board.enabled = true;
+    }
+
+    public void GameOver()
+    {
+
+        if (endScore > highScore)
+        {
+            highScore = endScore;
+        }
+
+        datasaver.SaveData();
+        
+        Debug.Log("this does in deed fire");
+        //  board.enabled = false;
+        // atkButton.enabled = false;
+        SceneManager.LoadScene(10);
+
+
+    }
 
 
     /// <summary>
@@ -32,6 +69,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+
+        datasaver = FindAnyObjectByType<DataSaverJSON>();
+
+        datasaver.LoadData();
+
         atkButton = FindAnyObjectByType<AttackButton>();
         board = FindAnyObjectByType<Board>();
 
@@ -44,37 +86,9 @@ public class GameManager : MonoBehaviour
                 playerHealth = objsWHealth[i];
             }
         }
-        // Set game instance to the game manager at all times
-        if (gameInstance == null) gameInstance = this;
-        else Destroy(this); // If there is already an existing game manager, eliminate this
+
     }
 
-    private void Start()
-    {
-        NewGame();
-    }
-
-    public void NewGame()
-    {
-        board.ClearBoard();
-
-        board.CreateTile();
-        board.CreateTile();
-        atkButton.enabled = true;
-        board.enabled = true;
-    }
-
-    public void GameOver() 
-    {
-
-
-        Debug.Log("this does in deed fire");
-        //  board.enabled = false;
-        // atkButton.enabled = false;
-        SceneManager.LoadScene(10);
-        
-    
-    }
 
     #region EvenEn/Dis
     /// <summary>
@@ -86,7 +100,11 @@ public class GameManager : MonoBehaviour
         atkButton.EUpdateScore += DisplayScore;
         playerHealth.EPlayerDied += GameOver;
     }
-   
+
+
+
+
+
     /// <summary>
     /// Unsubscribes incase something happens
     /// </summary>
@@ -97,27 +115,42 @@ public class GameManager : MonoBehaviour
         playerHealth.EPlayerDied -= GameOver;
     }
 
- #endregion
+    #endregion
+
+
+
     /// <summary>
     /// adds the score this is called from the board 
     /// </summary>
     /// <param name="Calc"> Calc is the score that the board tallied and is sending over</param>
-    private void Add2Score(int Calc) 
+    private void Add2Score(int Calc)
     {
 
         endScore = endScore + Calc;
-        playerMoney += endScore / 10;
-    
+
     }
+
+
+
+
+
 
     /// <summary>
     /// Displays score
     /// </summary>
-    private void DisplayScore() 
+    private void DisplayScore()
     {
         Debug.Log("Score update =" + endScore);
-        
-    
+
+
+
+    }
+
+
+    public void setHighscore(int newval)
+        {
+        highScore = newval;
     
     }
+
 }
