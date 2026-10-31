@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,12 @@ using UnityEngine.SceneManagement;
  */
 public class MainMenu : MonoBehaviour
 {
+    private AudioSource clickSound;
+
+    void Awake()
+    {
+        clickSound = GetComponent<AudioSource>();
+    }
     public void QuitGame()
     {
       //  Application.quit();
@@ -16,6 +23,14 @@ public class MainMenu : MonoBehaviour
 
     public void SwitchScene(int sceneIndex)
     {
+        StartCoroutine(ButtonDelay(sceneIndex));
+    }
+
+    private IEnumerator ButtonDelay(int sceneIndex)
+    {
+        clickSound.Play();
+        yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(sceneIndex);
+
     }
 }
