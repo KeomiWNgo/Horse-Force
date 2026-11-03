@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using System;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -8,6 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
     public PlayerHealth playerHealth; // assign game object inspectoor
     public int damagePerTick = 10;
     public float damageInterval = 3f;
+    public static event Action OnEnemyDestroyed;
 
     void Start()
     {
@@ -21,6 +22,11 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    //so wave spawner can inssert player ref right after instantiation
+    public void Initialize(PlayerHealth targetPlayer)
+    {
+        playerHealth = targetPlayer;
+    }
     IEnumerator DamageOverTime()
     {
         // runs while enemy script actirv
@@ -29,5 +35,12 @@ public class EnemyBehaviour : MonoBehaviour
             yield return new WaitForSeconds(damageInterval);
             playerHealth.TakeDamage(damagePerTick);
         }
+    }
+
+    public void Die()
+    {
+        OnEnemyDestroyed?.Invoke();
+
+        Destroy(gameObject);
     }
 }

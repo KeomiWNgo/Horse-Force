@@ -7,6 +7,7 @@ TagManager:
   - Event
   - Projectile
   - HasHealthComp
+  - BasicEnemy
   layers:
   - Default
   - TransparentFX

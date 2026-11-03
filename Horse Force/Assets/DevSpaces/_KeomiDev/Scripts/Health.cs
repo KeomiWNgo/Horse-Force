@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class Health : MonoBehaviour
     [SerializeField]
     public int maxhealth;
     public int currhealth { get;  set; }
-
+    [SerializeField] private int deathSceneIndex = 12; // Scene index to load on death
+    private bool isDead = false;
     #endregion
 
     void Start()
@@ -37,6 +39,16 @@ public class Health : MonoBehaviour
             {
                 EPlayerDied();
             }
+            if (gameObject.CompareTag("HasHealthComp"))
+            {
+                Destroy(gameObject);
+                SwitchScene(deathSceneIndex);
+            }
         }
     }
+    public void SwitchScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+
 }
