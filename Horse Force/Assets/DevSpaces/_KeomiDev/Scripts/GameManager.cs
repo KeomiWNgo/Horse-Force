@@ -53,10 +53,10 @@ public class GameManager : MonoBehaviour
             highScore = endScore;
         }
 
-        datasaver.SaveData();
+      //  datasaver.SaveData();
         
         Debug.Log("this does in deed fire");
-        //  board.enabled = false;
+//          board.enabled = false;
         // atkButton.enabled = false;
         SceneManager.LoadScene(10);
 
@@ -72,9 +72,10 @@ public class GameManager : MonoBehaviour
 
         datasaver = FindAnyObjectByType<DataSaverJSON>();
 
-        datasaver.LoadData();
+     //   datasaver.LoadData();
 
         atkButton = FindAnyObjectByType<AttackButton>();
+
         board = FindAnyObjectByType<Board>();
 
         objsWHealth = FindObjectsByType<Health>();
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Unsubscribes incase something happens
     /// </summary>
+    /// 
     private void OnDisable()
     {
         board.EAdd2Score -= Add2Score;

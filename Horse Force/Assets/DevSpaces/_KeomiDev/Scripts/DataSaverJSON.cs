@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DataSaverJSON : MonoBehaviour
 {
+    /*
     GameManager gameManager;
 
     private void Awake()
@@ -13,7 +14,7 @@ public class DataSaverJSON : MonoBehaviour
 
     public void Update()
     {
-        SaveData();
+      //  SaveData();
     }
 
     public void SaveData() 
@@ -34,6 +35,7 @@ public class DataSaverJSON : MonoBehaviour
     {
         string json = string.Empty;
 
+        GameManager tempgamemanager = gameManager;
 
             using (StreamReader reader = new StreamReader(Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.Json")) 
         {
@@ -45,10 +47,10 @@ public class DataSaverJSON : MonoBehaviour
         }
 
 
-        GameManager tempgamemanager = JsonUtility.FromJson<GameManager>(json);
+       JsonUtility.FromJsonOverwrite(json, tempgamemanager);
 
         gameManager.setHighscore(tempgamemanager.highScore);
 
     }
-
+    */
 }
