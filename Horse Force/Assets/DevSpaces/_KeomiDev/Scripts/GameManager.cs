@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             highScore = endScore;
         }
 
-      //  datasaver.SaveData();
+       datasaver.SaveData();
         
         Debug.Log("this does in deed fire");
 //          board.enabled = false;
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         datasaver = FindAnyObjectByType<DataSaverJSON>();
 
-     //   datasaver.LoadData();
+        datasaver.LoadData();
 
         atkButton = FindAnyObjectByType<AttackButton>();
 
@@ -153,6 +153,12 @@ public class GameManager : MonoBehaviour
         {
         highScore = newval;
     
+    }
+
+
+    public int getCurrScore() 
+    {
+        return endScore;
     }
 
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DataSaverJSON : MonoBehaviour
 {
-    /*
+    
     GameManager gameManager;
 
     private void Awake()
@@ -52,5 +52,5 @@ public class DataSaverJSON : MonoBehaviour
         gameManager.setHighscore(tempgamemanager.highScore);
 
     }
-    */
+    
 }
