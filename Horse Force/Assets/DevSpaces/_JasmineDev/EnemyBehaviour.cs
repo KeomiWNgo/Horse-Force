@@ -5,9 +5,14 @@ using System.Collections;
 public class EnemyBehaviour : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public PlayerHealth playerHealth; // assign game object inspectoor
+    public Health playerHealth; // assign game object inspectoor
     public int damagePerTick = 10;
     public float damageInterval = 3f;
+
+    private void Awake()
+    {
+        playerHealth = FindAnyObjectByType<Health>();
+    }
 
     void Start()
     {

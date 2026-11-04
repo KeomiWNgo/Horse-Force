@@ -31,6 +31,17 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+    }
+
+
+
+
+    public void TakeDamage(int damageAmount)
+    {
+        currhealth -= damageAmount;
+        Debug.Log("Player took damage! Current health: " + currhealth);
+
         if (currhealth <= 0)
         {
             if (gameObject.CompareTag("Player"))
@@ -39,4 +50,6 @@ public class Health : MonoBehaviour
             }
         }
     }
+
+
 }
