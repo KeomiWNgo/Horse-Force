@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -20,7 +21,7 @@ public class Health : MonoBehaviour
     public int currhealth { get;  set; }
 
     #endregion
-
+    public DamageFlash damageFlash;
     void Start()
     {
         currhealth = maxhealth;
@@ -41,6 +42,10 @@ public class Health : MonoBehaviour
     {
         currhealth -= damageAmount;
         Debug.Log("Player took damage! Current health: " + currhealth);
+        if (damageFlash != null )
+        {
+            damageFlash.TriggerFlash();
+        }
 
         if (currhealth <= 0)
         {
