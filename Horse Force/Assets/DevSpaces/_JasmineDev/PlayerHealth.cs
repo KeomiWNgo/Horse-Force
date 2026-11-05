@@ -1,5 +1,11 @@
 using UnityEngine;
-
+/*
+ * Author: Jasmine Guzeldere
+ * Date Created:9/-/2026
+ * Last Edited: 10/29/2026
+ * Last Edited By: Jasmine
+ * Description: This script is intendted to handle the player helath in conjunctionw ith the EnemyBehaviour.cs script
+ */
 public class PlayerHealth : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Player has died!");
-            // Add death logic here
+            //Add death logic here TBdone
         }
     }
 }
