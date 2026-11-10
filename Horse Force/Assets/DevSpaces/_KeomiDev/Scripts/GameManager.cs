@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private AttackButton atkButton;
 
-    private Health[] objsWHealth;
+    public Health[] objsWHealth;
 
     private DataSaverJSON datasaver;
 
