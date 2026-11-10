@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     public int damagePerTick = 10;
     public float damageInterval = 3f;
 
-    public Health[] objsWHealth;
+   
 
 
     private void Awake()
