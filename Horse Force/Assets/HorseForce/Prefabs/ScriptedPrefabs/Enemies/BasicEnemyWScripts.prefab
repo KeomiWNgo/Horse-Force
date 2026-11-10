@@ -74,6 +74,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56e80774f22b1ff4aa05ca013c915edf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5098533292974261331}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56e80774f22b1ff4aa05ca013c915edf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5879493636586353155}
   m_SourcePrefab: {fileID: 100100000, guid: 56e80774f22b1ff4aa05ca013c915edf, type: 3}
 --- !u!1 &8240868051146934600 stripped
 GameObject:
@@ -108,3 +111,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxhealth: 512
+--- !u!114 &5879493636586353155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240868051146934600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7aff3ffa55708439872ccfc447a400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingEnemy
+  movingEnemy: {fileID: 8240868051146934600}
+  y: 20
+  moveSpeed: 1

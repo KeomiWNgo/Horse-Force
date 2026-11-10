@@ -77,6 +77,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21693722e0212a547ac3a7b12d74624a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3547884787972917781}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21693722e0212a547ac3a7b12d74624a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 194564146603762670}
   m_SourcePrefab: {fileID: 100100000, guid: 21693722e0212a547ac3a7b12d74624a, type: 3}
 --- !u!1 &7136673176497373177 stripped
 GameObject:
@@ -132,3 +135,18 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   damagePerTick: 20
   damageInterval: 2
+--- !u!114 &194564146603762670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136673176497373177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7aff3ffa55708439872ccfc447a400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingEnemy
+  movingEnemy: {fileID: 7136673176497373177}
+  y: 20
+  moveSpeed: 1
