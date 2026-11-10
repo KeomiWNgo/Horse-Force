@@ -10,40 +10,101 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
-    public int[,] shopItems = new int[5, 5];
-    public float money;
-    public TMP_Text moneyText;
+    // Initialize Variables for Money
+    public int money;
+    public int healthItem;
+    public int multiplierItem;
+    public int shieldItem;
+
+    // Print the Text to the Screen
+    public TMP_Text money_Text;
+    public TMP_Text healthItem_Text;
+    public TMP_Text multiplierItem_Text;
+    public TMP_Text shieldItem_Text;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moneyText.text = "Horse Bucks: " + money.ToString();
+        // Get the current amount of items saved
+        money = PlayerPrefs.GetInt("money");
+        healthItem = PlayerPrefs.GetInt("healthPower");
+        multiplierItem = PlayerPrefs.GetInt("multiplierPower");
+        shieldItem = PlayerPrefs.GetInt("shieldPower");
 
-        // ID
-        shopItems[1, 1] = 1;
-        shopItems[1, 2] = 2;
-        shopItems[1, 3] = 3;
+        money_Text.text = "Money: " + money.ToString();
+        healthItem_Text.text = "Quantity: " + healthItem.ToString();
+        multiplierItem_Text.text = "Quantity: " + multiplierItem.ToString();
+        shieldItem_Text.text = "Quantity: " + shieldItem.ToString();
+    }
 
-        // Price
-        shopItems[2, 1] = 25;
-        shopItems[2, 2] = 50;
-        shopItems[2, 3] = 25;
-
-        // Quantity
-        shopItems[3, 1] = 0;
-        shopItems[3, 2] = 0;
-        shopItems[3, 3] = 0;
-    } 
-
-    public void BuyItem()
+    /// <summary>
+    /// Purchase the health item powerup
+    /// </summary>
+    public void buyHealth()
     {
-        GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
-        if (money >= shopItems[2, ButtonRef.GetComponent<ItemInfo>().itemID])
+        if (money >= 100)
         {
-            money -= shopItems[2, ButtonRef.GetComponent<ItemInfo>().itemID];
-            shopItems[3, ButtonRef.GetComponent<ItemInfo>().itemID]++;
-            moneyText.text = "Horse Bucks: " + money.ToString();
-            ButtonRef.GetComponent<ItemInfo>().quantity.text = shopItems[3, ButtonRef.GetComponent<ItemInfo>().itemID].ToString();
+            money -= 100;
+            money_Text.text = money.ToString(); // Update Money
+
+            healthItem += 1;
+            healthItem_Text.text = healthItem.ToString(); // Update Item
+
+            // Update the player items
+            PlayerPrefs.SetInt("money", money);
+            PlayerPrefs.SetInt("healthPower", healthItem);
+        }
+        else
+        {
+            Debug.Log("You Don't have enough money!");
+        }
+    }
+
+    /// <summary>
+    /// Purchase the multiplier item powerup
+    /// </summary>
+    public void buyMultiplier()
+    {
+        if (money >= 200)
+        {
+            money -= 200;
+            money_Text.text = money.ToString(); // Update Money
+
+            multiplierItem += 1;
+            multiplierItem_Text.text = multiplierItem.ToString(); // Update Item
+
+            // Update the player items
+            PlayerPrefs.SetInt("money", money);
+            PlayerPrefs.SetInt("multPower", multiplierItem);
+        }
+        else
+        {
+            Debug.Log("You Don't have enough money!");
+        }
+    }
+
+    /// <summary>
+    /// Purchase the shield item powerup
+    /// </summary>
+    public void buyShield()
+    {
+        if (money >= 100)
+        {
+            money -= 100;
+            money_Text.text = money.ToString(); // Update Money
+
+            shieldItem += 1;
+            shieldItem_Text.text = shieldItem.ToString(); // Update Item
+
+            // Update the player items
+            PlayerPrefs.SetInt("money", money);
+            PlayerPrefs.SetInt("shieldPower", shieldItem);
+        }
+        else
+        {
+            Debug.Log("You Don't have enough money!");
         }
     }
 }
+
+// Bingus
