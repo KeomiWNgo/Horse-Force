@@ -6205,6 +6205,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7592380285213550749, guid: 2029ea9dfb3d97744a9c977b04296d41, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 547b8672f512bde42b77ee089cc5a61e, type: 2}
     - target: {fileID: 8240868051146934600, guid: 2029ea9dfb3d97744a9c977b04296d41, type: 3}
       propertyPath: m_Name
       value: BasicEnemyWScripts
