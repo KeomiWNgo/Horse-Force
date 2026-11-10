@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using TMPro;
-[DefaultExecutionOrder(1)]
+
 
 public class Tile : MonoBehaviour
 {
