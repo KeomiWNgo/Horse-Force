@@ -1227,7 +1227,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cost:'
+  m_text: 'Cost: 50
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
   m_sharedMaterial: {fileID: 5239058938772647564, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
@@ -1711,7 +1713,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: UPGRADES
+  m_text: 'SHOP
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
   m_sharedMaterial: {fileID: 5239058938772647564, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
@@ -1720,8 +1724,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2563,16 +2567,13 @@ MonoBehaviour:
   healthUp: 1
   atkUp: 1
   defUp: 1
-  healthCost: 5
-  atkCost: 5
-  defCost: 5
+  healthCost: 50
+  atkCost: 50
+  defCost: 50
   money_Text: {fileID: 1884121570}
   healthUp_Text: {fileID: 1451931962}
   atkUp_Text: {fileID: 358738463}
   defUp_Text: {fileID: 1253892388}
-  healthUp_Cost: {fileID: 397363716}
-  atkUp_Cost: {fileID: 1923172012}
-  defUp_Cost: {fileID: 1748993302}
 --- !u!4 &1490200647
 Transform:
   m_ObjectHideFlags: 0
@@ -2868,8 +2869,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2977,7 +2978,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cost:  \n"
+  m_text: 'Cost:  50
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
   m_sharedMaterial: {fileID: 5239058938772647564, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
@@ -3551,7 +3554,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cost:'
+  m_text: 'Cost: 50
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
   m_sharedMaterial: {fileID: 5239058938772647564, guid: 0bc748cd509847a4d8fe4e7d57c73eb9, type: 2}
@@ -3793,7 +3798,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3811,7 +3816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23529413, g: 0.4666667, b: 0.8470589, a: 1}
+  m_Color: {r: 0.84705883, g: 0.65174216, b: 0.23529407, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
