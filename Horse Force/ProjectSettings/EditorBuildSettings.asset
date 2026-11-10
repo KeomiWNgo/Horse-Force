@@ -44,5 +44,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DevSpaces/_KeomiDev/KeomiTestScene.unity
     guid: 8bfbd091f1d39d5409cba118658800d2
+  - enabled: 1
+    path: Assets/HorseForce/Scenes/_Sandbox/IanTest/IanTestLevel.unity
+    guid: 69cebf6f2dc128e44becd451f3b23f1f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
