@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using TMPro;
+[DefaultExecutionOrder(1)]
+
 public class Tile : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created

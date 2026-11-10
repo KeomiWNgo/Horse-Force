@@ -1,6 +1,7 @@
 using System.Drawing;
 using Unity.Collections;
 using UnityEngine;
+[DefaultExecutionOrder(3)]
 
 public class Grid : MonoBehaviour
 {

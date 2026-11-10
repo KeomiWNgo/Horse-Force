@@ -7,6 +7,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SocialPlatforms.Impl;
 
+
+[DefaultExecutionOrder(4)]
+
 public class Board : MonoBehaviour
 {
 

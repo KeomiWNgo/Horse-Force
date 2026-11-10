@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder (-2)]
+[DefaultExecutionOrder (5)]
 public class GameManager : MonoBehaviour
 {
 
