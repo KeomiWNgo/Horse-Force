@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb88154c743a2174f8ca15e2bf801364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxhealth: 1024
+  maxhealth: 600
   damageFlash: {fileID: 191262749}
 --- !u!4 &31603663
 Transform:
@@ -4201,9 +4201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc46ed7ba4341341af610cbba8a98a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwipeDetection
-  minimumDistance: 0.2
-  maximumTime: 1
-  directionThreshold: 0.9
+  minimumDistance: 0.15
+  maximumTime: 1.2
+  directionThreshold: 0.8
   trail: {fileID: 14092213}
 --- !u!114 &1512829171
 MonoBehaviour:
