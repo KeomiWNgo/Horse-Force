@@ -45,6 +45,9 @@ public class Board : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         swipeDetection = FindAnyObjectByType<SwipeDetection>();
 
+
+
+
     }
 
     private void OnEnable()

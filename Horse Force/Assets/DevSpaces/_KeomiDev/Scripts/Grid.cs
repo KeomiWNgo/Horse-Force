@@ -18,6 +18,16 @@ public class Grid : MonoBehaviour
     {
         rows = GetComponentsInChildren<TileRow>();
         cells = GetComponentsInChildren<TileCell>();
+
+        if (rows.Length == 0)
+        {
+            Debug.Log("Grid Rows Fucked!");
+        }
+        if (cells.Length == 0)
+        {
+            Debug.Log("Grid Cells Fucked!");
+        }
+
     }
 
     private void Start()

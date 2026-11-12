@@ -10,6 +10,9 @@ public class DataSaverJSON : MonoBehaviour
     private void Awake()
     {
         gameManager = FindAnyObjectByType<GameManager>();
+
+
+        Directory.CreateDirectory(Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.Json");
     }
 
 
@@ -20,11 +23,14 @@ public class DataSaverJSON : MonoBehaviour
 
     public void SaveData() 
     {
+
+
         string json = JsonUtility.ToJson(gameManager);
 
         Debug.Log(json);
 
-        using (StreamWriter writer = new StreamWriter(Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.Json")) {
+
+        using (StreamWriter writer = new StreamWriter(Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.Json")) {
 
 
             writer.Write(json);
@@ -38,7 +44,7 @@ public class DataSaverJSON : MonoBehaviour
 
         GameManager tempgamemanager = gameManager;
 
-            using (StreamReader reader = new StreamReader(Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.Json")) 
+            using (StreamReader reader = new StreamReader(Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.Json")) 
         {
 
             json = reader.ReadToEnd();
