@@ -4,12 +4,13 @@ public class Projectile : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int damage;
-
+    public int heal;
 
     public void SetDamage (int dmg)
     {
 
         damage = dmg;
+
     
     }
 
@@ -19,11 +20,11 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("Hit");
 
-            Health healthOfTarget;
+            EnemyBehaviour healthOfTarget;
 
-            healthOfTarget = other.gameObject.GetComponent<Health>();
+            healthOfTarget = other.gameObject.GetComponent<EnemyBehaviour>();
 
-            healthOfTarget.currhealth = healthOfTarget.currhealth - damage;
+            healthOfTarget.enemyHealth = healthOfTarget.enemyHealth - damage;
 
             Destroy(gameObject);
         }

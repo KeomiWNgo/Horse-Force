@@ -114,7 +114,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8433975872455862938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb88154c743a2174f8ca15e2bf801364, type: 3}
   m_Name: 
@@ -136,6 +136,8 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   damagePerTick: 30
   damageInterval: 1
+  enemyHealth: 2048
+  healthMod: 0
 --- !u!114 &-527467758866563945
 MonoBehaviour:
   m_ObjectHideFlags: 0

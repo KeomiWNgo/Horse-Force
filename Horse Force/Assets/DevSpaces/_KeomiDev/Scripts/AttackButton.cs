@@ -15,8 +15,10 @@ public class AttackButton : MonoBehaviour
     private SwipeDetection swipeDetection;
     public Board board;
     public Projectile ProjPrefab;
+    public Health health;
     private int atkTotal;
     private int cooldown;
+    public int healAmount;
     public int coolThresh;
 
     private void Awake()
@@ -57,6 +59,7 @@ public class AttackButton : MonoBehaviour
 
              }*/
             atkTotal = board.ScoreCalc();
+            healAmount = atkTotal / 4;
 
             Debug.Log(atkTotal);
 
@@ -64,6 +67,7 @@ public class AttackButton : MonoBehaviour
             board.CreateTile();
             Projectile proj = Instantiate(ProjPrefab, transform);
             proj.SetDamage(atkTotal);
+            health.currhealth += healAmount; // Heal health according to damage dealt
             cooldown = 0;
         }
         EUpdateScore();
