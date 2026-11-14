@@ -99,7 +99,10 @@ MonoBehaviour:
   damagePerTick: 10
   damageInterval: 3
   enemyHealth: 200
+  enemyMax: 0
   healthMod: 0
+  attackMod: 0
+  manager: {fileID: 1257094497712851378, guid: c8ff5dffc338c42469ee8bab224fd693, type: 3}
 --- !u!114 &5098533292974261331
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     public int enemyMax;
     public int healthMod;
     public int attackMod;
+    public Shielding manager;
 
     private void Awake()
     {
@@ -43,7 +44,15 @@ public class EnemyBehaviour : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(damageInterval);
-            playerHealth.TakeDamage(damagePerTick);
+            if (manager.isShielded == true)
+            {
+                manager.isShielded = false;
+                Debug.Log("Damage Negated!");
+            }
+            else
+            {
+                playerHealth.TakeDamage(damagePerTick);
+            }
         }
     }
 
