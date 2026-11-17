@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d7ca75f5b2c924084288d2da0d4c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehaviour
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 3320226052358700375, guid: 6d7c97972c66e6a45ae2677cadafd6cc, type: 3}
   damagePerTick: 10
   damageInterval: 3
   enemyHealth: 200
