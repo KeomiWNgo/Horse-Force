@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     //wavesystem vars
     public TextMeshProUGUI waveCounter;
+    public TextMeshProUGUI enemiesRemainingText;
+    private int enemiesRemaining;
 
     public GameObject[] enemyPrefabs;
     public GameObject bossPrefab;
@@ -52,11 +54,18 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
+    void UpdateEnemiesRemaining()
+    {
+        if (enemiesRemainingText != null)
+        {
+            enemiesRemainingText.text = "Enemies Remaining: " + enemiesRemaining;
+        }
+    }
     void UpdateWaveCounter()
     {
         if(waveCounter != null)
         {
-            waveCounter.text = "Wave " + currentWave + " /5";
+            waveCounter.text = "Wave " + currentWave;
         }
     }
 
@@ -95,6 +104,10 @@ public class GameManager : MonoBehaviour
         while (currentWave <= 4)
         {
             UpdateWaveCounter();
+
+            enemiesRemaining = 5;
+            UpdateEnemiesRemaining();
+
             Debug.Log("Starting Wave " + currentWave);
             //5enemies in each wave
             for (int i = 0; i < enemiesPerWave; i++)
@@ -131,6 +144,7 @@ public class GameManager : MonoBehaviour
 
 
         }
+
 
         //BOSSSSS WAVEEEEE OOOOOO NEIGHHHHH
         Debug.Log("BOSS WAVE!");
@@ -189,7 +203,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Enemy Defeated!");
             waitingForEnemyDeath= false;
+            enemiesRemaining--;
+            UpdateEnemiesRemaining();
             currentEnemy = null;
+
+            Debug.Log("Enemies Remaining: " + enemiesRemaining);
         }
     }
 
