@@ -52,11 +52,11 @@ public class GameManager : MonoBehaviour
 
         if (endScore > highScore)
         {
-            highScore = endScore;
+            setHighscore(endScore);
         }
 
-        PlayerPrefs.SetInt("Highscore", highScore);
-
+        PlayerPrefs.SetInt("HighScore", highScore);
+        PlayerPrefs.Save();
 
     //  datasaver.SaveData();
         
@@ -81,10 +81,7 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (highScore == -1) {
-
-        //    datasaver.SaveData();
-        }
+     
 
 
        // datasaver = FindAnyObjectByType<DataSaverJSON>();
