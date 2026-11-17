@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     //keeps track of current enemy spawned
     private GameObject currentEnemy;
-
+    public EnemyHealthbar enemyHealthbar;
     //tracks if current enemy still allive and kickin, prevents next from spawning until certain current is defeated
     private bool waitingForEnemyDeath = false;
 
@@ -216,6 +216,11 @@ public class GameManager : MonoBehaviour
         //allows enemy to notify the manager when defeated
         enemy.Initialize(this);
 
+        //connect spawned enemy to the healthbar, tells what to display! :)
+        if (enemyHealthbar != null)
+        {
+            enemyHealthbar.SetEnemy(enemy);
+        }
         //NEXT ENEMY cannot spawn until this is false, which happens in EnemyDefeated
         waitingForEnemyDeath = true;
         Debug.Log("Enemy Spawned!");
@@ -223,6 +228,15 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    ///
+    ///
+    public void ClearEnemyHealthBar()
+    {
+        if (enemyHealthbar != null)
+        {
+            enemyHealthbar.SetEnemy(null);//healthbar will stop tracking defeated/destroyed enemy
+        }
+    }
     //ENEMY DEATH NOTIF!
     /// <summary>
     /// called by EnemyBehaviour when enemy health reaches 0
@@ -245,6 +259,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Enemies Remaining: " + enemiesRemaining);
         }
     }
+
 
 
     public void GameOver()

@@ -92,6 +92,8 @@ public class EnemyBehaviour : MonoBehaviour
         if (waveManager != null)
         {
             waveManager.EnemyDefeated(gameObject);
+            //clear the health bar when enemy is defeated^^^^VVVV
+            waveManager.ClearEnemyHealthBar();
         }
 
         Destroy(gameObject);
