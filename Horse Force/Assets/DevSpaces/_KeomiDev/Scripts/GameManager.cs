@@ -154,9 +154,8 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-        EnemyBehaviour enemyScript =
-            enemyPrefab.GetComponent<EnemyBehaviour>();
-        if (enemyScript != null)
+        EnemyBehaviour enemyScript = enemyPrefab.GetComponent<EnemyBehaviour>();
+        if (enemyScript == null)
         {
             Debug.LogError("Enemy prefab needs EnemyBehaviour!");
             return false;
