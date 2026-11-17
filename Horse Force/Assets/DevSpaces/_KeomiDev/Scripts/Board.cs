@@ -7,6 +7,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SocialPlatforms.Impl;
 
+
+
+
 public class Board : MonoBehaviour
 {
 
@@ -41,6 +44,9 @@ public class Board : MonoBehaviour
         tiles = new List<Tile>(16);
         gameManager = FindAnyObjectByType<GameManager>();
         swipeDetection = FindAnyObjectByType<SwipeDetection>();
+
+
+
 
     }
 

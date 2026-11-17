@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
 
@@ -15,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Health playerHealth;
     private Board board;
 
-    private int endScore;
+    private int endScore ;
 
     public int highScore;
 
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public Health[] objsWHealth;
 
-    private DataSaverJSON datasaver;
+   // private DataSaverJSON datasaver;
 
     #endregion
 
@@ -38,6 +37,9 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         board.ClearBoard();
+
+        highScore = PlayerPrefs.GetInt("HighScore");
+
 
         board.CreateTile();
         board.CreateTile();
@@ -53,7 +55,10 @@ public class GameManager : MonoBehaviour
             highScore = endScore;
         }
 
-       datasaver.SaveData();
+        PlayerPrefs.SetInt("Highscore", highScore);
+
+
+    //  datasaver.SaveData();
         
         Debug.Log("this does in deed fire");
 //          board.enabled = false;
@@ -69,10 +74,21 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            highScore = PlayerPrefs.GetInt("HighScore");
+        }
 
-        datasaver = FindAnyObjectByType<DataSaverJSON>();
 
-        datasaver.LoadData();
+
+        if (highScore == -1) {
+
+        //    datasaver.SaveData();
+        }
+
+
+       // datasaver = FindAnyObjectByType<DataSaverJSON>();
+
 
         atkButton = FindAnyObjectByType<AttackButton>();
 
