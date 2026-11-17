@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //wavesystem vars
+    public TextMeshProUGUI waveCounter;
+
     public GameObject[] enemyPrefabs;
     public GameObject bossPrefab;
     public Transform spawnPoint;
@@ -49,7 +52,13 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
-
+    void UpdateWaveCounter()
+    {
+        if(waveCounter != null)
+        {
+            waveCounter.text = "Wave " + currentWave + " /5";
+        }
+    }
 
     public void NewGame()
     {
@@ -85,6 +94,7 @@ public class GameManager : MonoBehaviour
         //waves 1-4
         while (currentWave <= 4)
         {
+            UpdateWaveCounter();
             Debug.Log("Starting Wave " + currentWave);
             //5enemies in each wave
             for (int i = 0; i < enemiesPerWave; i++)

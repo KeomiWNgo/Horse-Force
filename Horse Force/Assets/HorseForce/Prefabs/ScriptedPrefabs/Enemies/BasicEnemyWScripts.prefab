@@ -102,7 +102,7 @@ MonoBehaviour:
   playerHealth: {fileID: 3320226052358700375, guid: 6d7c97972c66e6a45ae2677cadafd6cc, type: 3}
   damagePerTick: 10
   damageInterval: 3
-  enemyHealth: 0
+  enemyHealth: 100
   enemyMax: 100
   healthMod: 0
   attackMod: 0
