@@ -44,27 +44,37 @@ public class GameManager : MonoBehaviour
     private int currentWave = 1;
     private int enemiesPerWave = 5;
 
+    //keeps track of current enemy spawned
     private GameObject currentEnemy;
 
+    //tracks if current enemy still allive and kickin, prevents next from spawning until certain current is defeated
     private bool waitingForEnemyDeath = false;
 
+    //storing reference so it can be managed or stopped, keepin tracj of sequence
     private Coroutine waveCoroutine;
     private void Start()
     {
         NewGame();
     }
 
+    //updates the enemy counter ui/hud, displays number of enemies remaining in the current wave
     void UpdateEnemiesRemaining()
     {
+        //checks that has been assigned
         if (enemiesRemainingText != null)
         {
+            //updates displayed text
             enemiesRemainingText.text = "Enemies Remaining: " + enemiesRemaining;
         }
     }
+
+    //updates wave counter ui/hud, displays the current wave number
     void UpdateWaveCounter()
     {
+        //checks that has been assigned
         if(waveCounter != null)
         {
+            //updates displayed text
             waveCounter.text = "Wave " + currentWave;
         }
     }
@@ -125,13 +135,13 @@ public class GameManager : MonoBehaviour
                 //spawning enemy
                 if (!SpawnEnemy(enemyPrefab))
                 {
-                    yield break;
+                    yield break;//stop entirely if fail to spawn
                 }
 
                 //wait until the spawned enemy dies
                 while (waitingForEnemyDeath)
                 {
-                    yield return null;
+                    yield return null;//pauses coroutine until next frame so the game can keep running while we wait for it to die. helps if anim.
                 }
             }
             Debug.Log("Wave " + currentWave + " Complete!");
@@ -144,9 +154,13 @@ public class GameManager : MonoBehaviour
 
 
         }
-
-
-        //BOSSSSS WAVEEEEE OOOOOO NEIGHHHHH
+        
+        //BOSSSSS WAVEEEEE OOOOOO NEIGHHHHH RAHJRAH
+        enemiesRemaining = 1;
+        UpdateEnemiesRemaining();
+        UpdateWaveCounter();
+       
+        //if the boss cant spawn, stop the wave sequence
         Debug.Log("BOSS WAVE!");
         if (!SpawnEnemy(bossPrefab))
         {
@@ -154,19 +168,27 @@ public class GameManager : MonoBehaviour
         }
 
         //waitforittodie
+        //(wait until boss has been defeated before continuing)
         while (waitingForEnemyDeath)
         {
             yield return null;
         }
 
+        //display message in console so we know it was actually defeated
         Debug.Log("BOSS DEFEATED!");
+        //set coroutine ref to null bc the wave sequence is done/finished
         waveCoroutine = null;
     }
 
     //Spawnin of the enemy
+    /// <summary>
+    /// spawns an enemy prefab at designated spawn point and initializes its behavour script so it can communicated w game manager
+    /// </summary>
+    /// <param name="enemyPrefab">The enemy prefab that will be spawned</param>
+    /// <returns>Returns true if the enemy spawns successfully or false if a required ref is missing!</returns>
     bool SpawnEnemy(GameObject enemyPrefab)
     {
-        //makin sure things are spick and span (making sure things are assigned correctly)
+        //makin sure things are spick and span (checks that required refs are assigned correctly)
         if(enemyPrefab == null)
         {
             Debug.LogError("Enemy prefab is missing!");
@@ -178,6 +200,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
+        //checks if enemy prefab has the EnemyBehaviour script component, simple but critical!
         EnemyBehaviour enemyScript = enemyPrefab.GetComponent<EnemyBehaviour>();
         if (enemyScript == null)
         {
@@ -185,26 +208,38 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-        //instantiate/spawn in the enemy!
+        //instantiate/spawn in the enemy! creates instance of selected prefab at designated spawn point
         currentEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        //gets the script component from spawned enemy
         EnemyBehaviour enemy = currentEnemy.GetComponent<EnemyBehaviour>();
+        //initializes the enemy and gives it a ref to THIS GameManager
+        //allows enemy to notify the manager when defeated
         enemy.Initialize(this);
 
+        //NEXT ENEMY cannot spawn until this is false, which happens in EnemyDefeated
         waitingForEnemyDeath = true;
         Debug.Log("Enemy Spawned!");
 
         return true;
     }
 
-    //ENEMY DEATH NOTIF
+    //ENEMY DEATH NOTIF!
+    /// <summary>
+    /// called by EnemyBehaviour when enemy health reaches 0
+    /// keeping track of defeated enemies and allowing next 2 spawn
+    /// </summary>
+    /// <param name="enemy"></param>
     public void EnemyDefeated(GameObject enemy)
     {
         if (enemy == currentEnemy)
         {
             Debug.Log("Enemy Defeated!");
+
+            //stes to false so the coroutine knows it can now spawn the next enemy
             waitingForEnemyDeath= false;
             enemiesRemaining--;
             UpdateEnemiesRemaining();
+            //clears reference to defeated enemy
             currentEnemy = null;
 
             Debug.Log("Enemies Remaining: " + enemiesRemaining);

@@ -708,7 +708,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 760254870}
+      - m_Target: {fileID: 1208959342}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: SwitchScene
         m_Mode: 3
