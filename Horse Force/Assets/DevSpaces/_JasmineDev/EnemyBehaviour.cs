@@ -47,6 +47,10 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// repeatedly damages the player at set tiem intervals whiel enemy is actiev
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DamageOverTime()
     {
         // runs while enemy script actirv
@@ -76,7 +80,9 @@ public class EnemyBehaviour : MonoBehaviour
             Die();
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     void Die()
     {
         isDead = true;
