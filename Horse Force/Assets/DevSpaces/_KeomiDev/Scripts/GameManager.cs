@@ -1,8 +1,10 @@
 using NUnit.Framework;
-using System;
+//using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -23,10 +25,25 @@ public class GameManager : MonoBehaviour
 
     public Health[] objsWHealth;
 
-   // private DataSaverJSON datasaver;
+    // private DataSaverJSON datasaver;
 
     #endregion
 
+    //wavesystem vars
+    public GameObject[] enemyPrefabs;
+    public GameObject bossPrefab;
+    public Transform spawnPoint;
+
+    public float timeBetweenWaves = 3f;
+
+    private int currentWave = 1;
+    private int enemiesPerWave = 5;
+
+    private GameObject currentEnemy;
+
+    private bool waitingForEnemyDeath = false;
+
+    private Coroutine waveCoroutine;
     private void Start()
     {
         NewGame();
@@ -45,7 +62,128 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         atkButton.enabled = true;
         board.enabled = true;
+
+        StartWaveSystem();
     }
+
+    public void StartWaveSystem()
+    {
+        if (waveCoroutine != null)
+        {
+            StopCoroutine(waveCoroutine);
+        }
+
+        currentWave = 1;
+        currentEnemy = null;
+        waitingForEnemyDeath =false;
+
+        waveCoroutine = StartCoroutine(WaveSequence());
+    }
+
+    IEnumerator WaveSequence()
+    {
+        //waves 1-4
+        while (currentWave <= 4)
+        {
+            Debug.Log("Starting Wave " + currentWave);
+            //5enemies in each wave
+            for (int i = 0; i < enemiesPerWave; i++)
+            {
+                if(enemyPrefabs == null || enemyPrefabs.Length == 0)
+                {
+                    Debug.LogError("No enemy prefabs assigned!");
+                    yield break;
+                }
+
+                GameObject enemyPrefab = enemyPrefabs[
+                    Random.Range(0, enemyPrefabs.Length)
+                    ];
+
+                //spawning enemy
+                if (!SpawnEnemy(enemyPrefab))
+                {
+                    yield break;
+                }
+
+                //wait until the spawned enemy dies
+                while (waitingForEnemyDeath)
+                {
+                    yield return null;
+                }
+            }
+            Debug.Log("Wave " + currentWave + " Complete!");
+
+            //next wave!
+            currentWave++;
+
+            //waiting until the next wave so that they dont happen so fast back to back bc could be overwhelmin IMO
+            yield return new WaitForSeconds(timeBetweenWaves);
+
+
+        }
+
+        //BOSSSSS WAVEEEEE OOOOOO NEIGHHHHH
+        Debug.Log("BOSS WAVE!");
+        if (!SpawnEnemy(bossPrefab))
+        {
+            yield break;
+        }
+
+        //waitforittodie
+        while (waitingForEnemyDeath)
+        {
+            yield return null;
+        }
+
+        Debug.Log("BOSS DEFEATED!");
+        waveCoroutine = null;
+    }
+
+    //Spawnin of the enemy
+    bool SpawnEnemy(GameObject enemyPrefab)
+    {
+        //makin sure things are spick and span (making sure things are assigned correctly)
+        if(enemyPrefab == null)
+        {
+            Debug.LogError("Enemy prefab is missing!");
+            return false;
+        }
+        if(spawnPoint == null)
+        {
+            Debug.LogError("Spawn Point is missing!");
+            return false;
+        }
+
+        EnemyBehaviour enemyScript =
+            enemyPrefab.GetComponent<EnemyBehaviour>();
+        if (enemyScript != null)
+        {
+            Debug.LogError("Enemy prefab needs EnemyBehaviour!");
+            return false;
+        }
+
+        //instantiate/spawn in the enemy!
+        currentEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        EnemyBehaviour enemy = currentEnemy.GetComponent<EnemyBehaviour>();
+        enemy.Initialize(this);
+
+        waitingForEnemyDeath = true;
+        Debug.Log("Enemy Spawned!");
+
+        return true;
+    }
+
+    //ENEMY DEATH NOTIF
+    public void EnemyDefeated(GameObject enemy)
+    {
+        if (enemy == currentEnemy)
+        {
+            Debug.Log("Enemy Defeated!");
+            waitingForEnemyDeath= false;
+            currentEnemy = null;
+        }
+    }
+
 
     public void GameOver()
     {

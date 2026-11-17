@@ -73,10 +73,10 @@ PrefabInstance:
       addedObject: {fileID: 8802839035091373952}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56e80774f22b1ff4aa05ca013c915edf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5098533292974261331}
+      addedObject: {fileID: 5879493636586353155}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56e80774f22b1ff4aa05ca013c915edf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5879493636586353155}
+      addedObject: {fileID: 3391413697535042890}
   m_SourcePrefab: {fileID: 100100000, guid: 56e80774f22b1ff4aa05ca013c915edf, type: 3}
 --- !u!1 &8240868051146934600 stripped
 GameObject:
@@ -103,20 +103,6 @@ MonoBehaviour:
   healthMod: 0
   attackMod: 0
   manager: {fileID: 1257094497712851378, guid: c8ff5dffc338c42469ee8bab224fd693, type: 3}
---- !u!114 &5098533292974261331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8240868051146934600}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb88154c743a2174f8ca15e2bf801364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxhealth: 512
-  damageFlash: {fileID: 0}
 --- !u!114 &5879493636586353155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +118,24 @@ MonoBehaviour:
   movingEnemy: {fileID: 8240868051146934600}
   y: 20
   moveSpeed: 1
+--- !u!65 &3391413697535042890
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240868051146934600}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 393.70367, y: 207.88521, z: 371.6867}
+  m_Center: {x: 0, y: -0.0000076293945, z: 0}

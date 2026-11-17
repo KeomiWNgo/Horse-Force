@@ -14,9 +14,18 @@ public class EnemyBehaviour : MonoBehaviour
     public int attackMod;
     public Shielding manager;
 
+    private GameManager waveManager;
+    private bool isDead = false;
+
+    public void Initialize(GameManager gameManager)
+    {
+        waveManager = gameManager;
+    }
+
     private void Awake()
     {
         playerHealth = FindAnyObjectByType<Health>();
+
         enemyMax += healthMod; // Add any additional modifiers
         damagePerTick += attackMod; // Add any additional modifiers
     }
@@ -44,6 +53,8 @@ public class EnemyBehaviour : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(damageInterval);
+
+            //checks shielding
             if (manager.isShielded == true)
             {
                 manager.isShielded = false;
@@ -58,10 +69,25 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (enemyHealth <= 0)
+        if (enemyHealth <= 0 && !isDead)
         {
-            if (enemyHealth < 0) enemyHealth = 0;
-            Destroy(gameObject);
+            // if (enemyHealth < 0) enemyHealth = 0;
+            // Destroy(gameObject);
+            Die();
         }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        enemyHealth = 0;
+
+        //notifying game manager
+        if (waveManager != null)
+        {
+            waveManager.EnemyDefeated(gameObject);
+        }
+
+        Destroy(gameObject);
     }
 }

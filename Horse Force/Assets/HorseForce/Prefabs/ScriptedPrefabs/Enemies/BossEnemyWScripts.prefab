@@ -73,9 +73,6 @@ PrefabInstance:
       addedObject: {fileID: 255170972937202655}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 259eba90ad98d9f4eb84b8964c30ccd9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4147907669578825877}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 259eba90ad98d9f4eb84b8964c30ccd9, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5865124187814884863}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 259eba90ad98d9f4eb84b8964c30ccd9, type: 3}
       insertIndex: -1
@@ -107,20 +104,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.449199, y: 5.1552687, z: 1.7875494}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4147907669578825877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8433975872455862938}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb88154c743a2174f8ca15e2bf801364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxhealth: 2048
-  damageFlash: {fileID: 0}
 --- !u!114 &5865124187814884863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +120,10 @@ MonoBehaviour:
   damagePerTick: 30
   damageInterval: 1
   enemyHealth: 2048
+  enemyMax: 0
   healthMod: 0
+  attackMod: 0
+  manager: {fileID: 1257094497712851378, guid: c8ff5dffc338c42469ee8bab224fd693, type: 3}
 --- !u!114 &-527467758866563945
 MonoBehaviour:
   m_ObjectHideFlags: 0
