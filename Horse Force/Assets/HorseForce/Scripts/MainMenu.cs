@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator ButtonDelay(int sceneIndex)
     {
+        Time.timeScale = 1;
         clickSound.Play();
         yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(sceneIndex);
